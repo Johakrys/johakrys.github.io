@@ -28,27 +28,7 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
   </div>
 
   <div class="carousel__videos">
-    <div class="carousel__video">
-      <Image
-        src={videoThumb1}
-        alt="Testimonio 1"
-        width={300}
-        height={500}
-        format="webp"
-        quality={80}
-      />
-      <button
-        class="carousel__play-button"
-        data-video-target="testimonio-video-1"
-        aria-label="Reproducir video 1">▶</button
-      >
-      <!-- Añadido data-video-target -->
-      <video id="testimonio-video-1" class="hidden" controls preload="none">
-        <!-- ID único -->
-        <source src="/testimonio1.mp4" type="video/mp4" />
-        Tu navegador no soporta la reproducción de videos.
-      </video>
-    </div>
+
     <!-- Testimonio 2 -->
     <div class="carousel__video">
       <Image
