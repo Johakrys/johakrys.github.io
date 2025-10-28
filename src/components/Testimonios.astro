@@ -1,0 +1,331 @@
+---
+import { Image } from "astro:assets";
+import videoThumb1 from "/public/assets/images/video1-thumbnail.jpg";
+import videoThumb2 from "/public/assets/images/video2-thumbnail.jpg";
+import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
+---
+
+<section
+  class="carousel bg-testimonios py-5"
+  id="testimonio"
+  aria-labelledby="testimonio-heading"
+>
+  <h2 id="testimonio-heading">Testimonios</h2>
+
+  <div class="carousel__encabezado">
+    <h3>Lo que nuestros pacientes dicen</h3>
+    <p>
+      Descubre las experiencias y testimonios de quienes han mejorado su salud
+      con nosotros.
+    </p>
+  </div>
+
+  <div>
+
+    <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-699ff91b-5340-440f-b675-f198df283988" data-elfsight-app-lazy></div>
+  </div>
+
+  <div class="carousel__videos">
+    <div class="carousel__video">
+      <Image
+        src={videoThumb1}
+        alt="Testimonio 1"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-1"
+        aria-label="Reproducir video 1">▶</button
+      >
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-1" class="hidden" controls preload="none">
+        <!-- ID único -->
+        <source src="/testimonio1.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+    </div>
+    <!-- Testimonio 2 -->
+    <div class="carousel__video">
+      <Image
+        src={videoThumb2}
+        alt="Testimonio 2"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-2"
+        aria-label="Reproducir video 2">▶</button
+      >
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-2" class="hidden" controls preload="none">
+        <!-- ID único -->
+        <source src="/testimonio2.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+    </div>
+    <!-- Testimonio 3 -->
+    <div class="carousel__video">
+      <Image
+        src={videoThumb3}
+        alt="Testimonio 3"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-3"
+        aria-label="Reproducir video 3">▶</button
+      >
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-3" class="hidden" controls preload="none">
+        <!-- ID único -->
+        <source src="/testimonio3.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+    </div>
+  </div>
+
+  <div class="carousel__link">
+    <a
+      href="https://www.instagram.com/clinicaregenera.cl"
+      id="nextTestimonio"
+      aria-label="Ve más testimonios aquí"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ve más testimonios aquí <span class="carousel__arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .carousel {
+    background-color: #3db7b0;
+    color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Añadido para mejorar contraste del H2 y aplicar estilos de Tratamientos */
+  #testimonio-heading {
+    font-size: 2.5rem; /* Igual que .tratamientos__titulo */
+    text-align: center; /* Añadido para consistencia */
+    color: #333; /* Igual que .tratamientos__titulo */
+    margin-bottom: 1rem; /* Añadido espacio inferior */
+  }
+
+  .carousel__encabezado {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .carousel__encabezado h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #003333; /* Color oscurecido para mejorar el contraste */
+    font-weight: bold;
+  }
+
+  .carousel__encabezado p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #004040; /* Color más oscuro para mejorar el contraste */
+    font-weight: 500;
+  }
+
+  .carousel__videos {
+    display: flex;
+    justify-content: space-around; /* Distribuye el espacio */
+    flex-wrap: wrap; /* Permite que los videos se envuelvan en pantallas pequeñas */
+    gap: 20px; /* Añade espacio entre los videos */
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+  }
+
+  .carousel__video {
+    position: relative;
+    width: 300px;
+    height: 500px;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: #fff;
+    margin: 0 auto;
+  }
+
+  .carousel__video img,
+  .carousel__video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+  }
+
+  .carousel__play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .carousel__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  .carousel__link a {
+    color: #003333; /* Color oscurecido para mejorar el contraste */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: relative;
+    transition: color 0.4s ease;
+  }
+
+  .carousel__link a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #003333; /* Color oscurecido para mejorar el contraste */
+    transition: width 0.4s ease;
+  }
+
+  .carousel__link a:hover,
+  .carousel__link a:focus {
+    color: #001a1a; /* Oscurecido aún más para el estado hover/focus */
+  }
+
+  .carousel__link a:hover::after,
+  .carousel__link a:focus::after {
+    width: 100%;
+    left: 0;
+    background: #003333;
+  }
+
+  .carousel__arrow {
+    font-size: 1.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  /* Ajustes responsivos si son necesarios */
+  @media (max-width: 1024px) {
+    .carousel__videos {
+      justify-content: center; /* Centrar en pantallas medianas */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel__video {
+      width: 80%; /* Ajustar ancho en móviles */
+      max-width: 300px; /* Mantener un máximo razonable */
+      height: auto; /* Altura automática basada en el contenido/aspecto */
+      aspect-ratio: 3 / 5; /* Mantener proporción si es necesario */
+    }
+    .carousel__encabezado h3 {
+      font-size: 1.8rem;
+    }
+    .carousel__encabezado p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel__video {
+      width: 90%; /* Más ancho en pantallas muy pequeñas */
+    }
+  }
+</style>
+
+<script>
+  // Script para manejar múltiples botones/videos
+  document.addEventListener("DOMContentLoaded", () => {
+    const playButtons = document.querySelectorAll(".carousel__play-button");
+
+    playButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const videoId = button.getAttribute("data-video-target");
+        const videoElement = document.getElementById(videoId);
+        const imageElement = button.previousElementSibling; // Asume que la imagen está justo antes
+
+        if (videoElement instanceof HTMLVideoElement && imageElement) {
+          // Ocultar imagen y botón de play
+          imageElement.classList.add("hidden");
+          button.classList.add("hidden");
+          // Mostrar y reproducir video
+          videoElement.classList.remove("hidden");
+          videoElement.play();
+        }
+      });
+    });
+
+    // Opcional: Detener otros videos cuando uno empieza a reproducirse
+    const videos = document.querySelectorAll(".carousel__video video");
+    videos.forEach((video) => {
+      video.addEventListener("play", () => {
+        videos.forEach((otherVideo) => {
+          if (otherVideo !== video && otherVideo instanceof HTMLVideoElement) {
+            otherVideo.pause();
+            // Opcional: Mostrar miniatura/botón de nuevo si se pausa otro video
+            const otherButton = document.querySelector(
+              '.carousel__play-button[data-video-target="' +
+                otherVideo.id +
+                '"]',
+            );
+            const otherImage = otherButton?.previousElementSibling;
+            if (otherButton && otherImage && otherVideo.paused) {
+              otherImage.classList.remove("hidden");
+              otherButton.classList.remove("hidden");
+              otherVideo.classList.add("hidden"); // Ocultar el video de nuevo
+              // Por simplicidad, solo pausamos y mostramos miniatura/botón.
+            }
+          }
+        });
+      });
+    });
+  });
+</script>

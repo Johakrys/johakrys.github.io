@@ -1,0 +1,184 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import { ClientRouter } from "astro:transitions"; // Updated import
+---
+
+<!doctype html>
+<html lang="es-CL">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title}</title>
+		<meta
+			name="description"
+			content="Clínica Regenera, tu Quiropráctico en Talca, especializada en Quiropraxia, Kinesiología, Osteopatía, Suplementación y Medicina Ortopédica. Mejora tu salud con tratamientos personalizados para el alivio de dolores y regeneración celular."
+		/>
+		<meta
+			name="keywords"
+			content="Quiropráctico, Quiropráctico Talca, Kinesiología, Quiropraxia, Osteopatía, Medicina Ortopédica, Suplementación, Talca, Chile, Biohacking, regeneración celular"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#3DB7B0" />
+		<meta name="robots" content="index, follow" />
+		<meta name="googlebot" content="index, follow" />
+
+		<!-- Eliminada la precarga del logo-blanco.webp -->
+
+		<!-- Preconexiones para recursos externos -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!-- Twitter Cards -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@clinicaregenera" />
+		<meta name="twitter:creator" content="@eduardosorio" />
+		<meta
+			name="twitter:title"
+			content="Quiropráctico en Talca | Clínica Regenera"
+		/>
+		<meta
+			name="twitter:description"
+			content="Especializados en Quiropraxia, Kinesiología, Osteopatía y Suplementación en Talca. Clínica Regenera ofrece tratamientos personalizados para mejorar tu salud y calidad de vida."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://www.clinicaregenera.cl/assets/images/logo.webp"
+		/>
+
+		<!-- Open Graph -->
+		<meta
+			property="og:image"
+			content="https://www.clinicaregenera.cl/assets/images/logo.webp"
+		/>
+		<meta
+			property="og:title"
+			content="Quiropráctico en Talca | Clínica Regenera"
+		/>
+		<meta
+			property="og:description"
+			content="Clínica Regenera, ubicada en Talca, ofrece servicios de Quiropraxia, Kinesiología y Osteopatía para mejorar tu bienestar. Reserva tu cita con Eduardo Osorio, experto Quiropráctico."
+		/>
+		<meta property="og:url" content="https://www.clinicaregenera.cl/" />
+		<meta property="og:site_name" content="Clínica Regenera" />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_CL" />
+
+		<!-- Canonical -->
+		<link rel="canonical" href="https://www.clinicaregenera.cl/" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/webp" href="/favicon.webp" />
+
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "LocalBusiness",
+				"name": "Clínica Regenera",
+				"image": "https://www.clinicaregenera.cl/assets/images/logo.webp",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Calle 30 Ote. 1420, Oficina 620",
+					"addressLocality": "Talca",
+					"addressRegion": "Maule",
+					"postalCode": "3460000",
+					"addressCountry": "CL"
+				},
+				"telephone": "+56 9 5464 3631",
+				"description": "Clínica especializada en Quiropraxia, Kinesiología, Osteopatía y Suplementación en Talca. Tratamientos personalizados para aliviar dolores y mejorar tu calidad de vida.",
+				"openingHours": "Mo-Fr 09:00-18:00",
+				"priceRange": "$$$",
+				"geo": {
+					"@type": "GeoCoordinates",
+					"latitude": -35.426,
+					"longitude": -71.675
+				},
+				"review": [
+					{
+						"@type": "Review",
+						"author": "Fidel Soto",
+						"reviewBody": "Saliendo de Clínica Regenera me siento renovado, con energía, ¡ME SIENTO POWER!",
+						"reviewRating": {
+							"@type": "Rating",
+							"ratingValue": "5"
+						}
+					},
+					{
+						"@type": "Review",
+						"author": "Claudia Cifuentes",
+						"reviewBody": "Sufría de dolores lumbares y cervicales por mi trabajo, pero después de mi primera sesión con Eduardo, los dolores disminuyeron significativamente.",
+						"reviewRating": {
+							"@type": "Rating",
+							"ratingValue": "5"
+						}
+					}
+				]
+			}
+		</script>
+		<ClientRouter />
+						<!-- Meta Pixel Code -->
+						<script>
+						!function(f,b,e,v,n,t,s)
+						{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+						n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+						if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+						n.queue=[];t=b.createElement(e);t.async=!0;
+						t.src=v;s=b.getElementsByTagName(e)[0];
+						s.parentNode.insertBefore(t,s)}(window, document,'script',
+						'https://connect.facebook.net/en_US/fbevents.js');
+						fbq('init', '726003997063018');
+						fbq('track', 'PageView');
+						</script>
+						<noscript><img height="1" width="1" style="display:none"
+						src="https://www.facebook.com/tr?id=726003997063018&ev=PageView&noscript=1"
+						/></noscript>
+						<!-- End Meta Pixel Code -->
+	</head>
+	<body>
+		<div class="scroll-container">
+			<slot />
+		</div>
+		<script>
+			// Importamos el script principal usando la sintaxis correcta de Astro
+			import "../scripts/main.js";
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html,
+	body {
+		font-family: "DM Sans", sans-serif;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.scroll-container {
+		width: 100%;
+		height: 100vh;
+		overflow-y: scroll;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		scroll-behavior: smooth;
+	}
+
+	.scroll-container::-webkit-scrollbar {
+		display: none;
+	}
+</style>

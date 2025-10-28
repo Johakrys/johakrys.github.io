@@ -1,0 +1,657 @@
+---
+import { Image } from "astro:assets";
+// Importar las imágenes de slides disponibles
+import fondoImage1 from "/public/assets/images/Slide 1.jpg";
+import fondoImage2 from "/public/assets/images/Slide 2.jpg";
+import fondoImage3 from "/public/assets/images/Slide 3.jpg";
+import fondoImage4 from "/public/assets/images/Slide 4.jpg";
+import fondoImage5 from "/public/assets/images/Slide 5.jpg";
+import fondoImage6 from "/public/assets/images/Slide 6.jpg";
+
+// Definir los datos de cada slide (imagen y textos)
+const slides = [
+  {
+    image: fondoImage1,
+    alt: "Tratamiento en Clínica Regenera",
+    heading: "Vive una vida sin dolor",
+    highlightWord: "sin dolor",
+    subheading: "Kinesiología, Quiropraxia, Osteopatía y Medicina Ortopédica",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage2,
+    alt: "Tratamiento de cuello en Clínica Regenera",
+    heading: "Quiropraxia y osteopatía",
+    highlightWord: "osteopatía",
+    subheading:
+      "Ajusta tu columna y extremidades para favorecer el funcionamiento del sistema nervioso central y favorecer la regeneración y desinflamación",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage3,
+    alt: "Tratamiento terapéutico en Clínica Regenera",
+    heading: "Recupera tu salud desde el origen",
+    highlightWord: "Ortopédica",
+    subheading: "",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage4,
+    alt: "Sesión de fisioterapia en Clínica Regenera",
+    heading: "<span class='text-nowrap'>Psiconeuro-</span>inmunología",
+    highlightWord: "",
+    subheading:
+      "La psiconeuroinmunología (PNI) es una disciplina científica que estudia la interacción entre los sistemas nervioso, inmune y endocrino, y cómo estos interactúan con los procesos psicológicos",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage5,
+    alt: "Tratamiento integral en Clínica Regenera",
+    heading: "Medicina del estilo de vida",
+    highlightWord: "personalizado",
+    subheading:
+      "Genera hábitos saludables como alimentación, actividad física, gestión del estrés, sueño adecuado y evita el uso de sustancias nocivas",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage6,
+    alt: "Terapia manual en Clínica Regenera",
+    heading: "Suplementación",
+    highlightWord: "calidad de vida",
+    subheading:
+      "Incorpora vitaminas, minerales u otros nutrientes que  tu cuerpo necesita.",
+    imageFormat: "jpg",
+  },
+];
+
+// Pasar los datos de los slides al script del lado del cliente
+const slidesData = slides.map((slide) => ({
+  src: slide.image.src,
+  alt: slide.alt,
+  heading: slide.heading,
+  highlightWord: slide.highlightWord,
+  subheading: slide.subheading,
+}));
+---
+
+<section class="hero" id="hero-section" aria-labelledby="hero-heading">
+  <!-- Contenedor para las imágenes de fondo -->
+  <div class="hero__background-container">
+    {
+      slides.map((slide, index) => (
+        <Image
+          src={slide.image}
+          alt={slide.alt}
+          class={`hero__background-image ${index === 0 ? "active" : ""}`}
+          data-index={index}
+          loading="eager"
+          format="jpeg"
+          quality={90}
+          width={1920}
+          height={1080}
+          densities={[1, 1.5, 2]}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Capa de superposición con gradiente -->
+  <div class="hero__overlay"></div>
+
+  <!-- Contenido del Hero posicionado a la izquierda -->
+  <div class="hero__content">
+    <div class="hero__content-inner">
+      <!-- Logo centrado (ya incluye el texto REGENERA) -->
+      <div class="hero__logo-container">
+        <img
+          src="/assets/images/logo-blanco.webp"
+          alt="Logo Regenera"
+          class="hero__logo-img"
+        />
+      </div>
+
+      <!-- Contenedor de altura fija para evitar layout shift -->
+      <div class="hero__text-fixed-container">
+        <!-- Título principal en línea única -->
+        <h1 id="hero-heading" class="fade-element active">
+          {/* El contenido se actualizará dinámicamente */}
+        </h1>
+
+        <!-- Subtítulo en línea única -->
+        <p id="hero-subheading" class="hero__instructions fade-element active">
+          {/* El contenido se actualizará dinámicamente */}
+        </p>
+      </div>
+
+      <!-- Botones en línea solo para versión desktop -->
+      <div class="hero__buttons desktop-only">
+        <button
+          class="btn btn-primary open-modal-btn"
+          id="openModalButton"
+          type="button"
+          aria-label="Reservar hora">Reservar hora</button
+        >
+        <button
+          class="btn btn-secondary"
+          type="button"
+          aria-label="Conoce más"
+          onclick="window.location.href='#tu-cita'">Conoce más</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de botones para móvil, aparecerá en la parte inferior -->
+  <div class="hero__buttons-container mobile-only">
+    <div class="hero__contact-text">
+      <div class="hero__contact-title">
+        ¿QUIERES CONTACTAR A CLÍNICA REGENERA?
+      </div>
+      <div class="hero__contact-subtitle">OCUPA NUESTROS CANALES DIGITALES</div>
+    </div>
+    <div class="hero__buttons">
+      <button
+        class="btn btn-primary open-modal-btn"
+        type="button"
+        aria-label="Reservar hora">Reservar hora</button
+      >
+      <button
+        class="btn btn-secondary"
+        type="button"
+        aria-label="Conoce más"
+        onclick="window.location.href='#tu-cita'">Conoce más</button
+      >
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ slidesData }}>
+  // Función principal para inicializar el hero
+  function initializeHero() {
+    const slides = slidesData;
+    let currentSlideIndex = 0;
+    const intervalTime = 5000; // Cambiar cada 5 segundos
+    let slideInterval; // Variable para almacenar el intervalo
+
+    const heroSection = document.getElementById("hero-section");
+    // Si no existe el hero en esta página, salir
+    if (!heroSection) return;
+
+    const backgroundImages = heroSection.querySelectorAll(
+      ".hero__background-image",
+    );
+    const headingElement = document.getElementById("hero-heading");
+    const subheadingElement = document.getElementById("hero-subheading");
+
+    // Si no existen los elementos necesarios, salir
+    if (!headingElement || !subheadingElement) return;
+
+    const textElements = [headingElement, subheadingElement];
+
+    function updateSlideContent(index) {
+      // Actualizar textos con efecto fade
+      textElements.forEach((el) => el.classList.remove("active"));
+
+      setTimeout(() => {
+        // Crear el HTML para el encabezado con la palabra resaltada
+        const heading = slides[index].heading;
+        const highlightWord = slides[index].highlightWord;
+
+        // Solo reemplazar si hay una palabra para destacar
+        let formattedHeading = heading;
+        if (highlightWord && highlightWord.length > 0) {
+          formattedHeading = heading.replace(
+            highlightWord,
+            `<span class="text-highlight">${highlightWord}</span>`,
+          );
+        }
+
+        headingElement.innerHTML = formattedHeading;
+        subheadingElement.textContent = slides[index].subheading;
+        textElements.forEach((el) => el.classList.add("active"));
+      }, 300); // Esperar un poco para que termine el fade-out
+
+      // Actualizar imagen de fondo con efecto fade
+      backgroundImages.forEach((img, imgIndex) => {
+        if (imgIndex === index) {
+          img.classList.add("active");
+        } else {
+          img.classList.remove("active");
+        }
+      });
+    }
+
+    // Función para abrir el modal (usa el script global para mostrarlo)
+    function openModal() {
+      const modal = document.getElementById("modal");
+      if (modal) {
+        modal.style.display = "flex";
+        modal.setAttribute("aria-modal", "true");
+        // Agregar listeners para cerrar el modal
+        const closeModalButton = modal.querySelector("#closeModal");
+        const modalContent = modal.querySelector(".modal__content");
+        // Cerrar al hacer click en la X
+        if (closeModalButton) {
+          closeModalButton.onclick = () => {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          };
+        }
+        // Cerrar al hacer click fuera del contenido
+        modal.onclick = (e) => {
+          if (
+            e.target === modal &&
+            modalContent &&
+            !modalContent.contains(e.target)
+          ) {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          }
+        };
+        // Cerrar con ESC
+        modal.onkeydown = (e) => {
+          if (e.key === "Escape") {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          }
+        };
+        // Dar foco al modal para que reciba el evento ESC
+        modal.tabIndex = -1;
+        modal.focus();
+      }
+    }
+
+    // Limpiar intervalo anterior si existe
+    if (slideInterval) {
+      clearInterval(slideInterval);
+    }
+
+    // Inicializar con el primer slide
+    updateSlideContent(currentSlideIndex);
+
+    // Cambiar slide periódicamente con un nuevo intervalo
+    slideInterval = setInterval(() => {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateSlideContent(currentSlideIndex);
+    }, intervalTime);
+
+    // Configurar event listeners para los botones (mejor práctica: por clase)
+    const setupButtonListeners = () => {
+      const modalButtons = heroSection.querySelectorAll(".open-modal-btn");
+      modalButtons.forEach((btn) => {
+        // Elimina cualquier listener previo para evitar duplicados
+        btn.removeEventListener("click", openModal);
+        btn.addEventListener("click", openModal);
+      });
+    };
+
+    // Espera a que el DOM esté completamente renderizado antes de agregar listeners
+    setTimeout(setupButtonListeners, 0);
+  }
+
+  // Inicializar al cargar el DOM
+  document.addEventListener("DOMContentLoaded", initializeHero);
+
+  // Reinicializar con cada navegación usando View Transitions
+  document.addEventListener("astro:page-load", initializeHero);
+</script>
+
+<style>
+  /* Importar fuente DM Sans */
+  @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    color: white;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .hero__background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+  .hero__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 85% center; /* Desplazado más a la derecha */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    z-index: 1;
+  }
+
+  .hero__background-image.active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(27, 81, 78, 0.9) 0%,
+      rgba(61, 183, 176, 0.3) 30%,
+      rgba(61, 183, 176, 0.3) 70%,
+      rgba(27, 81, 78, 0.9) 100%
+    );
+    z-index: -1;
+  }
+
+  /* Contenedor principal posicionado más a la izquierda */
+  .hero__content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 3;
+    padding-left: 10%; /* Reducido para estar más a la izquierda */
+  }
+
+  .hero__content-inner {
+    max-width: 500px;
+    text-align: left; /* Alineación a la izquierda */
+    /* Eliminado el fondo semi-transparente */
+  }
+
+  .hero__logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .hero__logo-img {
+    width: 150px;
+    height: auto;
+  }
+
+  /* Contenedor de altura fija para evitar layout shift */
+  .hero__text-fixed-container {
+    min-height: 170px; /* Altura fija para evitar saltos */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinear desde arriba */
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  /* Título principal con mejor gestión del texto */
+  #hero-heading {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.1;
+    margin: 0 0 15px;
+    text-align: left;
+    white-space: normal; /* Permitir que el texto se ajuste */
+    overflow-wrap: break-word; /* Romper palabras muy largas */
+    word-wrap: break-word; /* Para mayor compatibilidad */
+    max-width: 100%; /* Asegurar que no desborde */
+    font-size-adjust: 0.5; /* Ajustar tamaño de fuente automáticamente si es necesario */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra de texto para mejor legibilidad */
+  }
+
+  /* Prevenir que palabras específicas se dividan */
+  .text-nowrap {
+    white-space: nowrap;
+  }
+
+  /* Subtítulo con mejor gestión del texto */
+  .hero__instructions {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 0;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra de texto más pronunciada para mejor legibilidad */
+  }
+
+  /* Color para la palabra destacada */
+  .text-highlight {
+    color: #f6c61b;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra específica para texto destacado */
+  }
+
+  /* Subtítulo centrado y más pequeño */
+  .hero__instructions {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px; /* Tamaño reducido para mejor ajuste */
+    line-height: 1.3;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Estilos para la transición de texto */
+  .fade-element {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .fade-element.active {
+    opacity: 1;
+  }
+
+  /* Botones alineados a la izquierda */
+  .hero__buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 4;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    min-width: 160px;
+    white-space: nowrap;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+  }
+
+  .btn:hover,
+  .btn:focus {
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(27, 81, 78, 0.2);
+  }
+
+  /* Ocultar/mostrar elementos según el dispositivo */
+  .desktop-only {
+    display: flex;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  /* Media Queries para mantener el diseño responsivo */
+  @media (max-width: 1200px) {
+    .hero__content {
+      padding-left: 10%;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .hero__content {
+      padding-left: 5%;
+    }
+
+    .hero__background-image {
+      object-position: 65% center; /* Ajustado para tabletas */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: flex;
+    }
+
+    .hero__content {
+      justify-content: center;
+      padding-left: 0;
+      padding-bottom: 0; /* Eliminamos el padding-bottom anterior */
+      flex-direction: column; /* Organizamos en columna para separar el contenido de los botones */
+      display: flex;
+    }
+
+    .hero__content-inner {
+      max-width: 90%;
+      margin-top: 50px; /* Espacio superior para el contenido principal */
+    }
+
+    .hero__logo-img {
+      width: 100px;
+    }
+
+    .hero__text-fixed-container {
+      min-height: 140px;
+    }
+
+    #hero-heading {
+      font-size: 40px;
+      white-space: normal; /* Permitir múltiples líneas en móvil */
+    }
+
+    .hero__instructions {
+      font-size: 18px;
+    }
+
+    .hero__background-image {
+      object-position: center center; /* Centrado para móviles */
+    }
+
+    /* Banner para los botones en móvil */
+    .hero__buttons-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(27, 81, 78, 0) 0%,
+        rgba(27, 81, 78, 0.85) 50%,
+        rgba(27, 81, 78, 0.9) 100%
+      );
+      backdrop-filter: blur(3px);
+      padding: 40px 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Texto de contacto */
+    .hero__contact-text {
+      text-align: center;
+      margin-bottom: 15px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero__contact-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .hero__contact-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .hero__buttons {
+      position: relative;
+      width: 100%;
+      justify-content: center;
+      padding: 15px 0;
+      margin-top: 10px;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero__text-fixed-container {
+      min-height: 120px;
+    }
+
+    .hero__logo-img {
+      width: 80px;
+    }
+
+    #hero-heading {
+      font-size: 32px;
+    }
+
+    .hero__instructions {
+      font-size: 16px;
+    }
+
+    .hero__buttons {
+      flex-direction: row; /* Mantener en fila para pantallas pequeñas */
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      font-size: 14px;
+      min-width: auto;
+      flex: 1;
+      max-width: 150px;
+    }
+
+    .hero__background-image {
+      object-position: 45% center; /* Ligeramente hacia la izquierda en móviles pequeños */
+    }
+
+    .hero__buttons-container {
+      padding: 30px 15px 10px; /* Reducir padding en pantallas muy pequeñas */
+    }
+
+    .hero__contact-title {
+      font-size: 16px;
+    }
+
+    .hero__contact-subtitle {
+      font-size: 12px;
+    }
+  }
+</style>

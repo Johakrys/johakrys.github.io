@@ -1,0 +1,51 @@
+<a href="#top" id="back-to-top-link">↑</a>
+
+<script>
+  function setupBackButton() {
+    const backButton = document.getElementById("back-to-top-link");
+    const scrollContainer = document.getElementById("scroll-container");
+
+    if (backButton && scrollContainer) {
+      backButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    } else {
+      // Optional: Log if elements are not found after navigation
+      // console.log("Back button or scroll container not found after navigation.");
+    }
+  }
+
+  // Run on initial page load
+  document.addEventListener("DOMContentLoaded", setupBackButton);
+
+  // Run after each Astro client-side navigation
+  document.addEventListener("astro:page-load", setupBackButton);
+</script>
+
+<style>
+  #back-to-top-link {
+    display: inline-block;
+    position: fixed;
+    bottom: 15px; /* Ajustado como en móvil */
+    right: 15px; /* Ajustado como en móvil */
+    background-color: rgba(246, 198, 27, 0.85); /* Amarillo con 85% opacidad */
+    font-size: 16px; /* Tamaño de fuente reducido */
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px; /* Padding reducido */
+    border-radius: 5px;
+    text-decoration: none;
+
+    font-weight: bold;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #back-to-top-link:hover {
+    background-color: #d5a517; /* Color sólido en hover */
+    opacity: 1; /* Asegurar opacidad completa en hover */
+  }
+</style>
